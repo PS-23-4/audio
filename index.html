@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Audio</title>
+    <title>Audio Streaming</title>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let audio = document.getElementById("audioPlayer");
 
-            // Disable seeking
+            // Disable seeking (prevents skipping back)
             audio.addEventListener("timeupdate", function() {
                 if (audio.currentTime < audio.lastTime) {
                     audio.currentTime = audio.lastTime;
@@ -21,7 +21,7 @@
                 window.close();
             });
 
-            // Disable right-click & keyboard shortcuts
+            // Disable right-click & keyboard shortcuts to prevent downloading
             document.addEventListener("contextmenu", function(e) {
                 e.preventDefault();
             });
@@ -32,16 +32,17 @@
                 }
             });
 
-            // Disable audio download (hide controls)
-            audio.controls = false;
+            // Optional: You can remove 'download' from the source tag itself if visible
+            audio.controls = true; // Ensure the audio bar (play, pause, volume) is visible
         });
     </script>
 </head>
 <body>
-    <h2>Secure Audio Streaming</h2>
-    <audio id="audioPlayer" autoplay style="width:100%;" preload="none">
+    <h2>Audio Streaming</h2> <!-- Changed title here to "Audio Streaming" -->
+    <audio id="audioPlayer" controls autoplay style="width:100%;" preload="none">
         <source src="example_audio.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 </body>
 </html>
+
