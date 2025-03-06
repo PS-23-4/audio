@@ -31,15 +31,17 @@
                     e.preventDefault();
                 }
             });
+
+            // Disable audio download (hide controls)
+            audio.controls = false;
         });
     </script>
 </head>
 <body>
     <h2>Secure Audio Streaming</h2>
-    <audio id="audioPlayer" controls autoplay style="width:100%;" preload="none">
+    <audio id="audioPlayer" autoplay style="width:100%;" preload="none">
         <source src="example_audio.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 </body>
 </html>
-
