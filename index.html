@@ -4,41 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Streaming</title>
-    <style>
-        /* Custom audio player styling */
-        #audioPlayer {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .controls {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .controls button {
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .controls button:hover {
-            background-color: #45a049;
-        }
-
-        .controls input {
-            margin-left: 10px;
-            cursor: pointer;
-        }
-    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let audio = document.getElementById("audioPlayer");
             let playButton = document.getElementById("playPauseButton");
             let volumeControl = document.getElementById("volumeControl");
+
+            // Check if the audio has been played before using localStorage
+            if (localStorage.getItem("audioPlayed") === "true") {
+                alert("This audio has already been played and cannot be accessed again.");
+                window.close(); // Close the page automatically
+            } else {
+                localStorage.setItem("audioPlayed", "true"); // Mark audio as played
+            }
 
             // Play/Pause functionality
             playButton.addEventListener("click", function() {
@@ -51,7 +29,7 @@
                 }
             });
 
-            // Volume control
+            // Volume control functionality
             volumeControl.addEventListener("input", function() {
                 audio.volume = volumeControl.value;
             });
@@ -95,4 +73,3 @@
     </div>
 </body>
 </html>
-
