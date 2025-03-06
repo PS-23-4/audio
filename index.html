@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Streaming</title>
+    <style>
+        /* Custom audio player styling */
+        #audioPlayer {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .controls button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #45a049;
+        }
+
+        .controls input {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let audio = document.getElementById("audioPlayer");
+            let playButton = document.getElementById("playPauseButton");
+            let volumeControl = document.getElementById("volumeControl");
+
+            // Play/Pause functionality
+            playButton.addEventListener("click", function() {
+                if (audio.paused) {
+                    audio.play();
+                    playButton.textContent = "Pause";
+                } else {
+                    audio.pause();
+                    playButton.textContent = "Play";
+                }
+            });
+
+            // Volume control
+            volumeControl.addEventListener("input", function() {
+                audio.volume = volumeControl.value;
+            });
 
             // Disable seeking (prevents skipping back)
             audio.addEventListener("timeupdate", function() {
@@ -31,18 +79,20 @@
                     e.preventDefault();
                 }
             });
-
-            // Optional: You can remove 'download' from the source tag itself if visible
-            audio.controls = true; // Ensure the audio bar (play, pause, volume) is visible
         });
     </script>
 </head>
 <body>
-    <h2>Audio Streaming</h2> <!-- Changed title here to "Audio Streaming" -->
-    <audio id="audioPlayer" controls autoplay style="width:100%;" preload="none">
+    <h2>Audio Streaming</h2>
+    <audio id="audioPlayer" preload="none">
         <source src="example_audio.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
+
+    <div class="controls">
+        <button id="playPauseButton">Play</button>
+        <input id="volumeControl" type="range" min="0" max="1" step="0.1" value="1">
+    </div>
 </body>
 </html>
 
